@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    File Uploader
+{% endblock %}
+
+{% block header %}
+    File Uploader
+{% endblock %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data" class="form-container">
+        {% csrf_token %}
+        <label for="file-upload" class="file-label">
+            <span>Choose a file</span>
+            <input type="file" id="file-upload" name="file" accept=".py, .java">
+        </label>
+        <button type="submit">Upload</button>
+    </form>
+
+    {% if response %}
+        <div class="response-container">
+            <p>{{ response }}</p>
+        </div>
+    {% endif %}
+
+    {% if uploaded_file %}
+        <div class="response-container">
+            <p>File '{{ uploaded_file.name }}' uploaded successfully!</p>
+        </div>
+    {% endif %}
+
+    <a href="{% url 'logout' %}">Logout</a>
+    <a href="{% url 'home' %}">Home</a>
+    <a href="{% url 'dashboard' %}">Dashboard</a>
+{% endblock %}

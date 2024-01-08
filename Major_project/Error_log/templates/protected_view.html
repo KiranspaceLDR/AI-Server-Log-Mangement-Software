@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Protected View{% endblock %}
+
+{% block content %}
+    <p>This is a protected view.</p>
+    <p><a href="{% url 'home' %}">Home</a></p>
+    <p><a href="{% url 'logout' %}">Logout</a></p>
+    <!-- Your protected view content goes here -->
+{% endblock %}

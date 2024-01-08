@@ -1,0 +1,162 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}File Uploader{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'Error_log/styles.css' %}">
+    <!-- Include Plotly JavaScript for the graph to work -->
+    
+    <style>
+        body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Hide overflowing content */
+    background: url('{% static 'Error_log/Whangaehu.png' %}') center center/cover;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    position: relative;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background: rgba(246, 243, 243, 0.7); /* Set a background color for the container */
+    backdrop-filter: blur(2px); /* Apply a blur effect to the container's background */
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* Set a translucent overlay for the entire webpage */
+    z-index: -1;
+}
+
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin-bottom: 30px;
+            padding-left: 20px; /* Add padding for better spacing */
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 40px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        h1 {
+            color: #007bff;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            margin-right: 20px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link img {
+            width: 20px;
+            height: auto;
+            margin-right: 5px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .content-container {
+            /* Add styles for the content container */
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <!-- Placeholder for the website name and icon -->
+                <img src="{% static 'Error_log/logo.png' %}" alt="Logo"style="width: 80px; height: auto;" >
+                <h1>{% block header %}File Uploader{% endblock %}</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li class="nav-link"><img src="{% static 'Error_log/file-line-icon.png' %}" alt="Icon1"><a
+                            href="{% url 'upload_file' %}">Upload File</a></li>
+                    <li class="nav-link"><img src="{% static 'Error_log/four-squares-line-icon.png' %}" alt="Icon2"><a
+                            href="{% url 'dashboard' %}">Dashboard</a></li>
+                    <li class="nav-link"><img src="{% static 'Error_log/house-icon.png' %}" alt="Icon3"><a
+                            href="{% url 'home' %}">Home</a></li>
+                    <li class="nav-link"><img src="{% static 'Error_log/three-horizontal-lines-icon.png' %}" alt="Icon4"><a
+                            href="{% url 'protected_view' %}">Protected View</a></li>
+                    <!-- Add more links as needed -->
+
+                    <!-- Dropdown menu with Logout option -->
+                    <li class="dropdown">
+                        <a href="#" class="dropbtn">Menu</a>
+                        <div class="dropdown-content">
+                            <a href="{% url 'logout' %}">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="content-container">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .dashboard-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        margin: 20px;  /* Added margin for better spacing */
+    }
+
+    .chart {
+        flex: 1;
+        margin: 20px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+    }
+</style>
+
+<h2 class="text-center">Threat Level Distribution</h2>
+<div id="error-chart" class="chart"></div>
+
+
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script> <!-- Include Plotly JavaScript -->
+
+<script>
+    // Use JavaScript to initialize and render charts using the provided JSON data
+    const errorData = {{ error_counts|safe }};
+    const uploadData = {{ upload_counts|safe }};
+
+    // Create bar chart for threat level distribution
+    const errorChart = document.getElementById('error-chart');
+    Plotly.newPlot(errorChart, [{
+        type: 'bar',
+        x: errorData.map(entry => entry.threat_level),
+        y: errorData.map(entry => entry.count),
+        marker: { color: ['#3498db', '#e74c3c', '#2ecc71'] },
+    }]);
+
+    // Create line chart for upload counts
+
+    // Use Plotly.react for updating the chart
+    function updateUploadChart(newData) {
+        Plotly.react(uploadChart, [{
+            type: 'line',
+            x: newData.map(entry => entry.upload_date),
+            y: newData.map(entry => entry.count),
+            line: { color: '#3498db' },
+        }]);
+    }
+
+    // Example: Update the chart with new data after a delay
+    setTimeout(() => {
+        const newData = [
+            { upload_date: '2023-01-01', count: 10 },
+            { upload_date: '2023-01-02', count: 15 },
+            // Add more data as needed
+        ];
+        updateUploadChart(newData);
+    }, 3000);  // Delay in milliseconds
+</script>
+{% endblock %}

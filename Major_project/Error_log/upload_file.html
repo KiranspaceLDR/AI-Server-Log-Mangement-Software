@@ -1,0 +1,23 @@
+<!-- upload_file.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload File</title>
+</head>
+<body>
+
+<h2>Upload a Python file</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="file" accept=".py">
+    <br><br>
+    <button type="submit">Upload</button>
+</form>
+
+{% if response %}
+    <p>{{ response }}</p>
+{% endif %}
+
+</body>
+</html>

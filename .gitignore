@@ -1,0 +1,10 @@
+# Ignore compiled Python files
+*.pyc
+*.pyo
+
+# Ignore Django-specific files
+__pycache__
+db.sqlite3
+
+# Ignore environment variable files
+.env

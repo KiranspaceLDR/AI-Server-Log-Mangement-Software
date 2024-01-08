@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <p>Welcome to the home page!</p>
+    {% if user.is_authenticated %}
+        <p>Hello, {{ user.username }}!</p>
+        <p>You are logged in. <a href="{% url 'upload_file' %}">Try Our Project here</a></p>
+        <p><a href="{% url 'logout' %}">Logout</a></p>
+        <p><a href="{% url 'protected_view' %}">Protected View</a></p>
+    {% else %}
+    <p>You are not logged in. Please <a href="{% url 'login' %}">login</a>.</p>
+        <p><a href="{% url 'register' %}">Register</a></p>
+    {% endif %}
+    <!-- Your home page content goes here -->
+{% endblock %}
